@@ -135,34 +135,35 @@ void ballSearch :: checkIntersect (const Mat &field) {
     // sub[2] = (Point(ball.x+10,ball.y-10));
     // sub[3] = (Point(ball.x,ball.y-10));
     
-    // double surround = 0;
-    // //vector <Point> visited;
-    // for(int i = 0; i <= 19; i++) {
-    //     for(int j = 0; j <= 19 ; j++) {
-    //         surround= sqrt(pow((agentCenter.x - gridCenter[i][j].x), 2) + pow((agentCenter.y - gridCenter[i][j].y), 2));
-    //         if(surround <= directLine) {
-    //             //visited.push_back(gridCenter[i][j]);
-    //             circle(field, gridCenter[i][j], 1, Scalar(200,200,200), 2, 8, 0); 
+    double surround = 0;
+    //vector <Point> visited;
+    for(int i = 0; i <= 19; i++) {
+        for(int j = 0; j <= 19 ; j++) {
+            surround= sqrt(pow((agentCenter.x - gridCenter[i][j].x), 2) + pow((agentCenter.y - gridCenter[i][j].y), 2));
+            if(surround <= directLine) {
+                //visited.push_back(gridCenter[i][j]);
+                circle(field, gridCenter[i][j], 1, Scalar(200,200,200), 2, 8, 0); 
 
-    //             // poly[2].clear();
-    //             // //up left
-    //             // poly[2].add(Point2d(gridCenter[i][j].x-(stepHeight/2),gridCenter[i][j].y-(stepWidth/2)));
-    //             // //up right
-    //             // poly[2].add(Point2d(gridCenter[i][j].x+(stepHeight/2),gridCenter[i][j].y-(stepWidth/2)));
-    //             // //down right
-    //             // poly[2].add(Point2d(gridCenter[i][j].x+(stepHeight/2),gridCenter[i][j].y+(stepWidth/2)));
-    //             // //down left
-    //             // poly[2].add(Point2d(gridCenter[i][j].x-(stepHeight/2),gridCenter[i][j].y+(stepWidth/2)));       
+                poly[2].clear();
+                //up left
+                poly[2].add(Point2d(gridCenter[i][j].x-(stepHeight/2),gridCenter[i][j].y-(stepWidth/2)));
+                //up right
+                poly[2].add(Point2d(gridCenter[i][j].x+(stepHeight/2),gridCenter[i][j].y-(stepWidth/2)));
+                //down right
+                poly[2].add(Point2d(gridCenter[i][j].x+(stepHeight/2),gridCenter[i][j].y+(stepWidth/2)));
+                //down left
+                poly[2].add(Point2d(gridCenter[i][j].x-(stepHeight/2),gridCenter[i][j].y+(stepWidth/2)));       
             
-    //             // intersect.intersectPolygonSHPC(& poly[0],& poly[2],& intersect);
-    //             // double area = 0.001;
-    //             // area = intersect.computeArea() / (modelScale*modelScale);
-    //             // if( area >= 0.135 ) {
-    //             //     rectangle(field, poly[2][0], poly[2][2], Scalar(1,200,1), FILLED);
-    //             // }
-    //         }
-    //     }
-    // }
+                intersect.intersectPolygonSHPC(& poly[0],& poly[2],& intersect);
+                double area = 0.001;
+                area = intersect.computeArea() / (modelScale*modelScale);
+                if( area >= 0.135 ) {
+                    visited[i][j] = 1;
+                    rectangle(field, poly[2][0], poly[2][2], Scalar(1,200,1), FILLED);
+                }
+            }
+        }
+    }
 
     intersect.intersectPolygonSHPC(& poly[1],& poly[0],& intersect);
     //intersect.intersectPolygon(sub,4,clip,4,intersect);
@@ -176,13 +177,21 @@ void ballSearch :: checkIntersect (const Mat &field) {
         cout<<"=======\n";
     }
     else {
-        cout<<"finding ...\n";
+        cout<<"finding ball...\n\n";
     }
-    
-    // if (area >= 0.135)
-    //     rectangle(field, poly[1][0], poly[1][2], Scalar(1,1,200), FILLED);
+    visit();
 }
 
+//================================================
+// display the visited nodes
+void ballSearch :: visit () {
+
+    for(int i = 0; i <= 19; i++) {
+        for(int j = 0; j <= 19 ; j++) 
+            cout<< visited[i][j] << " ";
+        cout<<endl;
+    }
+}
 //================================================
 
 // find tangent ponts on circle of visibility
