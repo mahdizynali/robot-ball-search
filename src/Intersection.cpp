@@ -1,4 +1,4 @@
-#include "Intersection.hpp"
+#include "include/Intersection.hpp"
 
 struct PointAngle{
 	Point p;

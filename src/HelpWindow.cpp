@@ -1,4 +1,4 @@
-#include "HelpWindow.hpp"
+#include "include/HelpWindow.hpp"
 
 //---------------------------------
 //--| Help Window Configuration |--

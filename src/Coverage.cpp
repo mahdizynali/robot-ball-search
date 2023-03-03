@@ -1,4 +1,4 @@
-#include "Coverage.hpp"
+#include "include/Coverage.hpp"
 
 void Coverage::setState (bool st) {
     state = st;

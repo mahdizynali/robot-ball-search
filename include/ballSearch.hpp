@@ -15,7 +15,7 @@ class ballSearch {
         Point upPoint,downPoint,distance,agentCenter,ball;
         polygon intersect;
         vector <vector<Point>> gridCenter;
-        int visited [20][20] = {0};
+        char visited [20][20] = {'0'};
     
     public :
 

@@ -1,4 +1,4 @@
-#include "ballSearch.hpp"
+#include "include/ballSearch.hpp"
 
 //================================================
 
@@ -158,7 +158,7 @@ void ballSearch :: checkIntersect (const Mat &field) {
                 double area = 0.001;
                 area = intersect.computeArea() / (modelScale*modelScale);
                 if( area >= 0.135 ) {
-                    visited[i][j] = 1;
+                    visited[i][j] = '1'; 
                     rectangle(field, poly[2][0], poly[2][2], Scalar(1,200,1), FILLED);
                 }
             }
